@@ -128,7 +128,13 @@ class Board:
         Returns:
             True if we have failed to fill out the puzzle, False otherwise
         """
-        pass
+        for row in self.rows:
+            for col in row:
+                if col == []:
+                    return True
+                
+        return False
+
 
     def goal_test(self) -> bool:
         """Check if we've completed the puzzle (if we've placed all the numbers).
@@ -137,7 +143,7 @@ class Board:
         Returns:
             True if we've placed all numbers, False otherwise
         """
-        pass
+        return self.num_nums_placed == self.size*self.size
 
     def update(self, row: int, column: int, assignment: int) -> None:
         """Assigns the given value to the cell given by passed in row and column
@@ -151,14 +157,14 @@ class Board:
             column - index of the column to assign
             assignment - value to place at given row, column coordinate
         """
-        self.rows[row][column] = assignment 
+        self.rows[row][column] = assignment
+        self.num_nums_placed += 1
 
         for i in range(self.size):
             #remove the assignment from the row
             remove_if_exists(self.rows[row][i], assignment)
             #remove the assignment from the column
             remove_if_exists(self.rows[i][column], assignment)
-        # print(self.subgrid_coordinates[row][column])
         for i, j in self.subgrid_coordinates(row, column):
             remove_if_exists(self.rows[i][j], assignment)
 
@@ -174,7 +180,16 @@ def DFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    pass
+    s = Stack([state])
+    while not s.is_empty():
+        b = s.pop()
+        mcc = b.find_most_constrained_cell()
+        row = mcc[0]
+        col = mcc[1]
+        for sel in b.rows[row][col]:
+            b.update(row, col, sel)
+            s.push(b)
+    
 
 
 def BFS(state: Board) -> Board:
