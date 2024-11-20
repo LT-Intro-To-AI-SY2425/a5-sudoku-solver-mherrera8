@@ -27,6 +27,8 @@ BFS is usually more efficient, the correct answer can usually be found quicker b
 
 2. How did the choice of data structures (like the Stack for DFS and Queue for BFS) impact the implementation and functionality of the algorithms? Are there alternative data structures or design patterns that could have been used to achieve the same objectives?
 
-
+The choice of the data structures affect the functionality of the algorithms because depending on what the algorithm is looking for each data structure has its own limitations, this could cause the program to run for a longer amount of time and ultimatly make the program inefficient.
 
 3. Considering the current implementation, how might the Sudoku solver be adapted or extended for larger puzzles or different types of grid-based logic games? How can the lessons learned from this assignment be applied to real-world problem-solving or optimization challenges?
+
+Sudoku solver can be adapted to solve for killer sudoku, where certain numbers are grouped together to create a sum given to the user. Lessons from this assignment can be applied to real-world problem solving skills because it shows two different methods to isolating a solution.

@@ -182,13 +182,16 @@ def DFS(state: Board) -> Board:
     """
     s = Stack([state])
     while not s.is_empty():
-        b = s.pop()
+        b: Board = s.pop()
         mcc = b.find_most_constrained_cell()
         row = mcc[0]
         col = mcc[1]
+        if b.goal_test():
+            return b
         for sel in b.rows[row][col]:
-            b.update(row, col, sel)
-            s.push(b)
+            cpy = copy.deepcopy[b]
+            cpy.update(row, col, sel)
+            s.push(cpy)
     
 
 
